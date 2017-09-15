@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CabServiceDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_BilllingDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="BillingMonth" Type="varchar" MaxLength="50" />
+          <Property Name="DriveriD" Type="int" />
+          <Property Name="DriverAmount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CompanyAmount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tbl_Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="CNICNO" Type="varchar" MaxLength="50" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_LocationCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Payments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentTypeID" Type="int" />
+          <Property Name="PassengerID" Type="int" />
+          <Property Name="DriveID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PaymentDate" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tbl_PaymentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="ISCardHolder" Type="bit" />
+          <Property Name="CardNO" Type="varchar" MaxLength="50" />
+          <Property Name="CardExpiry" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_Pessenger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="CNICNO" Type="varchar" MaxLength="50" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_PessengerPayment">
+          <Key>
+            <PropertyRef Name="PessengerID" />
+          </Key>
+          <Property Name="PessengerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="DebitAmount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ReferenceID" Type="int" />
+          <Property Name="CreditAmount" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tbl_SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="LoginID" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_TripDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TripRequestID" Type="int" />
+          <Property Name="DriverID" Type="int" />
+          <Property Name="PickTime" Type="date" />
+          <Property Name="DropTime" Type="date" />
+          <Property Name="VehicelID" Type="int" />
+          <Property Name="BillType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_TripRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PessengerID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="StartLocation" Type="varchar" MaxLength="50" />
+          <Property Name="EndLocation" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Vehicle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleTypeID" Type="int" />
+          <Property Name="Model" Type="varchar" MaxLength="20" />
+          <Property Name="Number" Type="varchar" MaxLength="50" />
+          <Property Name="FuelType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_VehicleType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="EntryDate" Type="date" />
+        </EntityType>
+        <EntityContainer Name="CabServiceDbModelStoreContainer">
+          <EntitySet Name="tbl_BilllingDetail" EntityType="Self.tbl_BilllingDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Driver" EntityType="Self.tbl_Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_LocationCity" EntityType="Self.tbl_LocationCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Payments" EntityType="Self.tbl_Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PaymentType" EntityType="Self.tbl_PaymentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Pessenger" EntityType="Self.tbl_Pessenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PessengerPayment" EntityType="Self.tbl_PessengerPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SystemUser" EntityType="Self.tbl_SystemUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_TripDetail" EntityType="Self.tbl_TripDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_TripRequest" EntityType="Self.tbl_TripRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Vehicle" EntityType="Self.tbl_Vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_VehicleType" EntityType="Self.tbl_VehicleType" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CabServiceDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_BilllingDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="BillingMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriveriD" Type="Int32" />
+          <Property Name="DriverAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tbl_Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNICNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_LocationCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Payments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentTypeID" Type="Int32" />
+          <Property Name="PassengerID" Type="Int32" />
+          <Property Name="DriveID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_PaymentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISCardHolder" Type="Boolean" />
+          <Property Name="CardNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardExpiry" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_Pessenger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNICNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_PessengerPayment">
+          <Key>
+            <PropertyRef Name="PessengerID" />
+          </Key>
+          <Property Name="PessengerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="DebitAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ReferenceID" Type="Int32" />
+          <Property Name="CreditAmount" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tbl_SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_TripDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TripRequestID" Type="Int32" />
+          <Property Name="DriverID" Type="Int32" />
+          <Property Name="PickTime" Type="DateTime" Precision="0" />
+          <Property Name="DropTime" Type="DateTime" Precision="0" />
+          <Property Name="VehicelID" Type="Int32" />
+          <Property Name="BillType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_TripRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PessengerID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Vehicle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleTypeID" Type="Int32" />
+          <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_VehicleType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="CabServiceDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_BilllingDetail" EntityType="Self.tbl_BilllingDetail" />
+          <EntitySet Name="tbl_Driver" EntityType="Self.tbl_Driver" />
+          <EntitySet Name="tbl_LocationCity" EntityType="Self.tbl_LocationCity" />
+          <EntitySet Name="tbl_Payments" EntityType="Self.tbl_Payments" />
+          <EntitySet Name="tbl_PaymentType" EntityType="Self.tbl_PaymentType" />
+          <EntitySet Name="tbl_Pessenger" EntityType="Self.tbl_Pessenger" />
+          <EntitySet Name="tbl_PessengerPayment" EntityType="Self.tbl_PessengerPayment" />
+          <EntitySet Name="tbl_SystemUser" EntityType="Self.tbl_SystemUser" />
+          <EntitySet Name="tbl_TripDetail" EntityType="Self.tbl_TripDetail" />
+          <EntitySet Name="tbl_TripRequest" EntityType="Self.tbl_TripRequest" />
+          <EntitySet Name="tbl_Vehicle" EntityType="Self.tbl_Vehicle" />
+          <EntitySet Name="tbl_VehicleType" EntityType="Self.tbl_VehicleType" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CabServiceDbModelStoreContainer" CdmEntityContainer="CabServiceDbEntities">
+          <EntitySetMapping Name="tbl_BilllingDetail">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_BilllingDetail">
+              <MappingFragment StoreEntitySet="tbl_BilllingDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="BillingMonth" ColumnName="BillingMonth" />
+                <ScalarProperty Name="DriveriD" ColumnName="DriveriD" />
+                <ScalarProperty Name="DriverAmount" ColumnName="DriverAmount" />
+                <ScalarProperty Name="CompanyAmount" ColumnName="CompanyAmount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Driver">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_Driver">
+              <MappingFragment StoreEntitySet="tbl_Driver">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CNICNO" ColumnName="CNICNO" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_LocationCity">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_LocationCity">
+              <MappingFragment StoreEntitySet="tbl_LocationCity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Payments">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_Payments">
+              <MappingFragment StoreEntitySet="tbl_Payments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="PassengerID" ColumnName="PassengerID" />
+                <ScalarProperty Name="DriveID" ColumnName="DriveID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PaymentType">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_PaymentType">
+              <MappingFragment StoreEntitySet="tbl_PaymentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ISCardHolder" ColumnName="ISCardHolder" />
+                <ScalarProperty Name="CardNO" ColumnName="CardNO" />
+                <ScalarProperty Name="CardExpiry" ColumnName="CardExpiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Pessenger">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_Pessenger">
+              <MappingFragment StoreEntitySet="tbl_Pessenger">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CNICNO" ColumnName="CNICNO" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PessengerPayment">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_PessengerPayment">
+              <MappingFragment StoreEntitySet="tbl_PessengerPayment">
+                <ScalarProperty Name="PessengerID" ColumnName="PessengerID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SystemUser">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_SystemUser">
+              <MappingFragment StoreEntitySet="tbl_SystemUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TripDetail">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_TripDetail">
+              <MappingFragment StoreEntitySet="tbl_TripDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TripRequestID" ColumnName="TripRequestID" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="PickTime" ColumnName="PickTime" />
+                <ScalarProperty Name="DropTime" ColumnName="DropTime" />
+                <ScalarProperty Name="VehicelID" ColumnName="VehicelID" />
+                <ScalarProperty Name="BillType" ColumnName="BillType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TripRequest">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_TripRequest">
+              <MappingFragment StoreEntitySet="tbl_TripRequest">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PessengerID" ColumnName="PessengerID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
+                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Vehicle">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_Vehicle">
+              <MappingFragment StoreEntitySet="tbl_Vehicle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_VehicleType">
+            <EntityTypeMapping TypeName="CabServiceDbModel.tbl_VehicleType">
+              <MappingFragment StoreEntitySet="tbl_VehicleType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
